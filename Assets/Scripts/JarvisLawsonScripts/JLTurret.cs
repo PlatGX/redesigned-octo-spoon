@@ -5,7 +5,7 @@ using UnityEngine;
 public class JLTurret : MonoBehaviour
 {
     [SerializeField] private float lookInterval = 0.01f;
-    [SerializeField] private float fireInterval = 0.5f; // Interval between shots
+    [SerializeField] private float fireInterval = 0.5f;
     [Range(30, 110)]
     [SerializeField] private float fieldOfView = 60;
     [SerializeField] private float rotationSpeed = 10f;
@@ -17,11 +17,11 @@ public class JLTurret : MonoBehaviour
     private Rigidbody playerRigidbody;
     private bool playerInSight = false;
     private GameObject currentTarget;
-    private Animator turretAnimator; // Reference to the Animator component
+    private Animator turretAnimator;
 
     void Start()
     {
-        turretAnimator = GetComponent<Animator>(); // Assign the Animator component
+        turretAnimator = GetComponent<Animator>();
         rayEmitter = this.transform.GetChild(0);
         playerObj = GameObject.FindGameObjectsWithTag("Player");
 
@@ -65,7 +65,7 @@ public class JLTurret : MonoBehaviour
 
                             if (!turretAnimator.GetBool("IsEmerged"))
                             {
-                                turretAnimator.SetBool("IsEmerged", true); // Trigger emerge animation
+                                turretAnimator.SetBool("IsEmerged", true);
                             }
                         }
                         else
@@ -80,7 +80,6 @@ public class JLTurret : MonoBehaviour
                 }
             }
 
-            // Set to idle or active state based on whether it's firing or not
             turretAnimator.SetBool("IsIdle", !playerInSight);
         }
     }
@@ -117,7 +116,6 @@ public class JLTurret : MonoBehaviour
 
             StartCoroutine(DeactivateProjectileAfterDelay(projectile, 3f));
 
-            // Trigger recoil animation
             turretAnimator.SetTrigger("Recoil");
         }
     }
